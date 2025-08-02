@@ -1,4 +1,4 @@
-// Product data organized by categories with pricing adjustments
+// Product data organized by categories with dietary options
 import vanillaCupcake from "@/assets/vanilla-cupcake.jpg";
 import chocolateCupcake from "@/assets/chocolate-cupcake.jpg";
 import redVelvetCupcake from "@/assets/red-velvet-cupcake.jpg";
@@ -15,9 +15,14 @@ export interface Product {
   image: string;
   description: string;
   category: 'cupcakes' | 'pastries' | 'cookies';
+  dietaryOptions: {
+    containsEgg: boolean;
+    vegan: boolean;
+    glutenFree?: boolean;
+  };
 }
 
-// Base products from the menu
+// Base products organized by your specified categories
 export const baseProducts: Product[] = [
   // Cupcakes
   {
@@ -26,7 +31,8 @@ export const baseProducts: Product[] = [
     basePrice: 50,
     image: vanillaCupcake,
     description: 'Classic vanilla cupcake with smooth vanilla cream frosting',
-    category: 'cupcakes'
+    category: 'cupcakes',
+    dietaryOptions: { containsEgg: true, vegan: false }
   },
   {
     id: 'chocolate-cupcake',
@@ -34,7 +40,8 @@ export const baseProducts: Product[] = [
     basePrice: 60,
     image: chocolateCupcake,
     description: 'Rich chocolate cupcake with decadent chocolate frosting',
-    category: 'cupcakes'
+    category: 'cupcakes',
+    dietaryOptions: { containsEgg: true, vegan: false }
   },
   {
     id: 'double-chochip-muffin',
@@ -42,7 +49,8 @@ export const baseProducts: Product[] = [
     basePrice: 40,
     image: chocolateCupcake,
     description: 'Moist muffin loaded with double chocolate chips',
-    category: 'cupcakes'
+    category: 'cupcakes',
+    dietaryOptions: { containsEgg: true, vegan: false }
   },
   {
     id: 'red-velvet-cupcake',
@@ -50,7 +58,8 @@ export const baseProducts: Product[] = [
     basePrice: 60,
     image: redVelvetCupcake,
     description: 'Velvety red cupcake with cream cheese frosting',
-    category: 'cupcakes'
+    category: 'cupcakes',
+    dietaryOptions: { containsEgg: true, vegan: false }
   },
   {
     id: 'strawberry-cupcake',
@@ -58,17 +67,19 @@ export const baseProducts: Product[] = [
     basePrice: 60,
     image: strawberryCupcake,
     description: 'Fresh strawberry cupcake with strawberry buttercream',
-    category: 'cupcakes'
+    category: 'cupcakes',
+    dietaryOptions: { containsEgg: true, vegan: false }
   },
   
-  // Pastries/Cakes
+  // Pastries
   {
     id: 'mawa-cake',
     name: 'Mawa Cake',
     basePrice: 600,
     image: vanillaCake,
     description: 'Traditional Indian milk cake with rich flavors',
-    category: 'pastries'
+    category: 'pastries',
+    dietaryOptions: { containsEgg: false, vegan: false }
   },
   {
     id: 'vanilla-cake',
@@ -76,7 +87,8 @@ export const baseProducts: Product[] = [
     basePrice: 500,
     image: vanillaCake,
     description: 'Classic vanilla sponge cake with vanilla frosting',
-    category: 'pastries'
+    category: 'pastries',
+    dietaryOptions: { containsEgg: true, vegan: false }
   },
   {
     id: 'chocolate-truffle-cake',
@@ -84,7 +96,8 @@ export const baseProducts: Product[] = [
     basePrice: 800,
     image: chocolateTruffleCake,
     description: 'Luxurious chocolate cake with truffle ganache',
-    category: 'pastries'
+    category: 'pastries',
+    dietaryOptions: { containsEgg: true, vegan: false }
   },
   {
     id: 'butterscotch-cake',
@@ -92,7 +105,8 @@ export const baseProducts: Product[] = [
     basePrice: 600,
     image: vanillaCake,
     description: 'Buttery butterscotch flavored layer cake',
-    category: 'pastries'
+    category: 'pastries',
+    dietaryOptions: { containsEgg: true, vegan: false }
   },
   {
     id: 'rasmalai-cake',
@@ -100,7 +114,8 @@ export const baseProducts: Product[] = [
     basePrice: 800,
     image: vanillaCake,
     description: 'Fusion cake inspired by traditional rasmalai',
-    category: 'pastries'
+    category: 'pastries',
+    dietaryOptions: { containsEgg: false, vegan: false }
   },
   {
     id: 'black-forest-cake',
@@ -108,7 +123,8 @@ export const baseProducts: Product[] = [
     basePrice: 600,
     image: chocolateTruffleCake,
     description: 'Classic German chocolate cake with cherries',
-    category: 'pastries'
+    category: 'pastries',
+    dietaryOptions: { containsEgg: true, vegan: false }
   },
   {
     id: 'strawberry-cake',
@@ -116,7 +132,8 @@ export const baseProducts: Product[] = [
     basePrice: 700,
     image: strawberryCupcake,
     description: 'Fresh strawberry layer cake with strawberry cream',
-    category: 'pastries'
+    category: 'pastries',
+    dietaryOptions: { containsEgg: true, vegan: false }
   },
   {
     id: 'irish-coffee-cake',
@@ -124,17 +141,19 @@ export const baseProducts: Product[] = [
     basePrice: 600,
     image: chocolateTruffleCake,
     description: 'Coffee-infused cake with Irish cream flavoring',
-    category: 'pastries'
+    category: 'pastries',
+    dietaryOptions: { containsEgg: true, vegan: false }
   },
 
-  // Cookies
+  // Cookies, Tea cakes & Brownies
   {
     id: 'chocochip-cookies',
     name: 'Chocolate Chip Cookies',
     basePrice: 60,
     image: chocolateChipCookies,
     description: 'Classic cookies loaded with chocolate chips',
-    category: 'cookies'
+    category: 'cookies',
+    dietaryOptions: { containsEgg: true, vegan: false }
   },
   {
     id: 'double-chochip-cookies',
@@ -142,7 +161,8 @@ export const baseProducts: Product[] = [
     basePrice: 70,
     image: chocolateChipCookies,
     description: 'Double the chocolate, double the delight',
-    category: 'cookies'
+    category: 'cookies',
+    dietaryOptions: { containsEgg: true, vegan: false }
   },
   {
     id: 'coconut-cookies',
@@ -150,7 +170,8 @@ export const baseProducts: Product[] = [
     basePrice: 30,
     image: chocolateChipCookies,
     description: 'Crispy cookies with coconut flakes',
-    category: 'cookies'
+    category: 'cookies',
+    dietaryOptions: { containsEgg: false, vegan: true }
   },
   {
     id: 'salted-tea-cookie',
@@ -158,7 +179,8 @@ export const baseProducts: Product[] = [
     basePrice: 30,
     image: chocolateChipCookies,
     description: 'Perfect tea-time companion with a hint of salt',
-    category: 'cookies'
+    category: 'cookies',
+    dietaryOptions: { containsEgg: false, vegan: true }
   },
   {
     id: 'banana-cake',
@@ -166,7 +188,8 @@ export const baseProducts: Product[] = [
     basePrice: 60,
     image: vanillaCake,
     description: 'Moist banana flavored cake',
-    category: 'cookies'
+    category: 'cookies',
+    dietaryOptions: { containsEgg: true, vegan: false }
   },
   {
     id: 'chocolate-brownies',
@@ -174,7 +197,8 @@ export const baseProducts: Product[] = [
     basePrice: 80,
     image: chocolateBrownies,
     description: 'Fudgy chocolate brownies with nuts',
-    category: 'cookies'
+    category: 'cookies',
+    dietaryOptions: { containsEgg: true, vegan: false }
   },
   {
     id: 'red-velvet-brownies',
@@ -182,7 +206,8 @@ export const baseProducts: Product[] = [
     basePrice: 80,
     image: chocolateBrownies,
     description: 'Red velvet brownies with cream cheese swirl',
-    category: 'cookies'
+    category: 'cookies',
+    dietaryOptions: { containsEgg: true, vegan: false }
   }
 ];
 
@@ -209,4 +234,16 @@ export const getCategoryProducts = (category: 'special' | 'sugarless' | 'kids') 
     price: calculatePrice(product.basePrice, category),
     categoryType: category
   }));
+};
+
+// Get products by food category
+export const getProductsByCategory = (category: 'cupcakes' | 'pastries' | 'cookies') => {
+  return baseProducts.filter(product => product.category === category);
+};
+
+// Category display names
+export const categoryDisplayNames = {
+  cupcakes: 'Cupcakes',
+  pastries: 'Pastries',
+  cookies: 'Cookies, Tea Cakes & Brownies'
 };
