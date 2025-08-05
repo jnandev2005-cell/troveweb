@@ -3,6 +3,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ShoppingBag, Heart, Leaf, Egg } from "lucide-react";
 import { useState } from "react";
+import { useCartStore } from "@/store/cartStore";
+import toast from "react-hot-toast";
 
 interface ProductCardProps {
   id: string;
@@ -30,6 +32,7 @@ const ProductCard = ({
   dietaryOptions
 }: ProductCardProps) => {
   const [isLiked, setIsLiked] = useState(false);
+  const addItem = useCartStore(state => state.addItem);
   
   const getCategoryBadge = () => {
     switch (categoryType) {
@@ -50,23 +53,35 @@ const ProductCard = ({
 
   const discount = getDiscountPercentage();
 
+  const handleAddToCart = () => {
+    addItem({
+      id,
+      name,
+      price,
+      image,
+      categoryType,
+      dietaryOptions
+    });
+    toast.success(`${name} added to cart!`);
+  };
+
   return (
-    <Card className="group overflow-hidden border-0 shadow-card hover:shadow-elegant transition-all duration-500 transform hover:-translate-y-2 bg-card rounded-xl">
+    <Card className="group overflow-hidden border-0 shadow-card hover:shadow-elegant transition-all duration-300 transform hover:-translate-y-1 bg-card rounded-xl">
       <div className="relative overflow-hidden">
         <img
           src={image}
           alt={name}
-          className="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-110"
+          className="w-full h-52 object-cover transition-transform duration-300 group-hover:scale-105"
         />
         
         {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         
         {/* Heart Button */}
         <Button
           variant="ghost"
           size="icon"
-          className="absolute top-4 right-4 bg-background/90 backdrop-blur-sm hover:bg-background opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-full shadow-lg"
+          className="absolute top-4 right-4 bg-background/90 backdrop-blur-sm hover:bg-background opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-full shadow-lg"
           onClick={() => setIsLiked(!isLiked)}
         >
           <Heart className={`h-4 w-4 ${isLiked ? 'fill-red-500 text-red-500' : 'text-muted-foreground'}`} />
@@ -118,8 +133,8 @@ const ProductCard = ({
             <Button 
               variant="default" 
               size="sm"
-              className="group/btn hover:shadow-lg transition-all duration-300"
-              onClick={() => console.log(`Adding ${name} to cart`)}
+              className="group/btn hover:shadow-lg transition-all duration-300 hover:scale-105"
+              onClick={handleAddToCart}
             >
               <ShoppingBag className="h-4 w-4 mr-2 group-hover/btn:scale-110 transition-transform" />
               Add

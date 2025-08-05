@@ -2,9 +2,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ShoppingBag } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useCartStore } from "@/store/cartStore";
+import Cart from "./Cart";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { getTotalItems, toggleCart } = useCartStore();
 
   const navigation = [
     { name: "Home", href: "/" },
@@ -45,11 +48,18 @@ const Header = () => {
 
           {/* Actions */}
           <div className="flex items-center space-x-6">
-            <Button variant="ghost" size="icon" className="relative hover:bg-primary/10 transition-colors duration-300">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="relative hover:bg-primary/10 transition-colors duration-300"
+              onClick={toggleCart}
+            >
               <ShoppingBag className="h-5 w-5" />
-              <span className="absolute -top-2 -right-2 h-6 w-6 bg-primary text-primary-foreground rounded-full text-xs flex items-center justify-center font-bold shadow-lg">
-                0
-              </span>
+              {getTotalItems() > 0 && (
+                <span className="absolute -top-2 -right-2 h-6 w-6 bg-primary text-primary-foreground rounded-full text-xs flex items-center justify-center font-bold shadow-lg animate-pulse">
+                  {getTotalItems()}
+                </span>
+              )}
             </Button>
             <Button variant="hero" size="lg" className="hidden sm:flex px-8 py-3 text-base font-semibold">
               Order Now
@@ -90,6 +100,8 @@ const Header = () => {
           </div>
         )}
       </div>
+      
+      <Cart />
     </header>
   );
 };
