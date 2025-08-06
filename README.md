@@ -1,5 +1,48 @@
 # Welcome to your Lovable project
 
+## Trove - Premium Dessert E-commerce Platform
+
+A fully functional e-commerce website for premium desserts with OTP-based authentication and complete order management.
+
+### Features
+
+- **No-Login OTP-Based Checkout**: Customers can order without creating accounts
+- **Complete Cart System**: Add, remove, and manage items with persistent storage
+- **OTP Verification**: Secure phone number verification for orders
+- **WhatsApp Integration**: Orders automatically sent to WhatsApp
+- **Payment Gateway Ready**: Structured for Razorpay/Stripe integration
+- **Responsive Design**: Works perfectly on all devices
+- **Product Categories**: Cupcakes, Pastries, Cookies & Brownies
+- **Dietary Information**: Vegan and egg-content indicators
+
+### Quick Start
+
+```bash
+# Install dependencies
+npm install
+
+# Run frontend only
+npm run dev
+
+# Run with backend API (recommended)
+npm run dev:full
+```
+
+### Backend API Endpoints
+
+- `POST /api/send-otp` - Send OTP to phone number
+- `POST /api/verify-otp` - Verify OTP code
+- `POST /api/orders` - Create new order
+- `GET /api/orders/:id` - Get order by ID
+- `PATCH /api/orders/:id/status` - Update order status
+- `GET /api/orders` - Get all orders (admin)
+
+### Demo Credentials
+
+- **Demo OTP**: `123456` (for testing)
+- **WhatsApp Number**: Update in `src/pages/Checkout.tsx`
+- **Payment Gateway**: Add your keys in checkout component
+
 ## Project info
 
 **URL**: https://lovable.dev/projects/ac7e77bd-846f-4ae3-aa15-f31f1dc10d56

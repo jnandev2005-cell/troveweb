@@ -50,6 +50,11 @@ export const useCartStore = create<CartStore>()(
             items: [...items, { ...newItem, quantity: 1 }]
           });
         }
+        
+        // Auto-close cart after adding item
+        setTimeout(() => {
+          set({ isOpen: false });
+        }, 2000);
       },
       
       removeItem: (id) => {
